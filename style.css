@@ -34,3 +34,13 @@ ul.no-bullets {
 .light-text {
     font-weight: lighter;
 }
+
+.meta {
+    color:gray;
+    font-style: italic;
+}
+
+#home {
+    text-decoration: none;
+    color: black
+}
