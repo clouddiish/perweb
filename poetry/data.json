@@ -1,0 +1,64 @@
+[
+    {
+        "collection": "rotten brain",
+        "year": 2020,
+        "language": "PL",
+        "title": "ostrze 1",
+        "paragraphs": [
+            "to jest historia miłosna<br>",
+            "papierowych dłoni<br>",
+            "i metalowych nożyczek"
+        ]
+    },
+    {
+        "collection": "rotten brain",
+        "year": 2021,
+        "language": "ENG",
+        "title": "the collective",
+        "paragraphs": [
+            "Do not mourn the atoms<br>that once called themselves my name;<br>they were just borrowed for a short while.",
+            "And at last they're coming back to the stars.",
+            "So, please,<br>there is no need to recall<br>for they no longer are mine."
+        ]
+    },
+    {
+        "collection": "bittersweet",
+        "year": 2022,
+        "language": "ENG",
+        "title": "old love",
+        "paragraphs": [
+            "There are times<br>when I almost forget<br>the oldest childhood friend<br>and the first shy love.",
+            "And then there are times<br>when all I can think of<br>are my oldest childhood friend<br>and my first shy love.",
+            "Oh how I wish I could stop them<br>from re-entering my mind.",
+            "But I just can't help it;<br>remnants of love are forever."
+        ]
+    },
+    {
+        "collection": "humanity",
+        "year": 2023,
+        "language": "ENG",
+        "title": "animal kingdom",
+        "paragraphs": [
+            "Why can a dog be just a dog,<br>why can a cat be just a cat,<br>why a bird can just be a bird,<br>while we have to be so much more than men?",
+            "Why can't a person be simply allowed<br>to only nap, walk, eat and laugh?",
+            "Why can all the others just be,<br>while we HAVE to do, to think, to achieve?",
+            "Is this the making of overgrown brains?<br>Is it all futile? Are we insane?",
+            "Or do other duties truly emerge<br>once a species learns its own name?"
+        ]
+    },
+    {
+        "collection": "the last day of summer",
+        "year": 2024,
+        "language": "ENG",
+        "title": "receipts",
+        "paragraphs": [
+            "on the fist receipt I found<br>i saw you bought a gym pass",
+            "(I never knew you went to the gym)",
+            "right in the next compartment<br>was a London metro ticket",
+            "(from the very last trip you took)",
+            "finally, there was another receipt<br>just two months younger",
+            "(but quite a bit longer)",
+            "marking the beginning of the end<br>with the list of all these meds"
+        ]
+    }
+]
