@@ -82,7 +82,7 @@ class Controller {
 
     displayPoems(poems) {
         this.view.clearPoemsDiv();
-        for (let i = 0; i < poems.length; i++) {
+        for (let i = poems.length - 1; i >=0; i--) {
             this.view.addPoem(poems[i]);
         }
     }
