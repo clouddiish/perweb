@@ -4,6 +4,7 @@ class Model {
         this.fetchPoems();
 
         this.yearsChecked = new Set([]);
+        this.collectionsChecked = new Set([]);
     }
 
     async fetchPoems() {
@@ -25,6 +26,11 @@ class View {
         this.y2021 = document.getElementById("2021");
         this.y2020 = document.getElementById("2020");
 
+        this.formCollection = document.getElementById("formCollection");
+        this.rottenBrain = document.getElementById("rottenBrain");
+        this.humanity = document.getElementById("humanity");
+        this.bittersweet = document.getElementById("bittersweet");
+        this.ldofSummer = document.getElementById("ldofSummer");
 
     }
 
@@ -38,6 +44,11 @@ class View {
         this.y2022.checked = false;
         this.y2021.checked = false;
         this.y2020.checked = false;
+        this.formCollection.checked = false;
+        this.rottenBrain.checked = false;
+        this.humanity.checked = false;
+        this.bittersweet.checked = false;
+        this.ldofSummer.checked = false;
     }
 
     addPoem(poem) {
@@ -72,6 +83,16 @@ class View {
         })
     }
 
+    bindFilterByCollection(handler){
+        this.formCollection.addEventListener("input", event => {
+            if (event.target.className == "form-check-input") {
+                const state = event.target.checked;
+                const value = event.target.value;
+                handler(state, value);
+            }
+        })
+    }
+
 }
 
 class Controller {
@@ -79,7 +100,8 @@ class Controller {
         this.model = model;
         this.view = view;
 
-        this.view.bindFilterByYear(this.handleFilterByYear)
+        this.view.bindFilterByYear(this.handleFilterByYear);
+        this.view.bindFilterByCollection(this.handleFilterByCollection);
     }
 
     getAllPoems() {
@@ -129,12 +151,23 @@ class Controller {
             this.model.yearsChecked.delete(value);
             this.displayPoems(this.model.poems.filter(poem => this.model.yearsChecked.has(poem.year)));
         }
-
-        if (this.model.yearsChecked.size == 0) {
-            this.displayPoems(this.model.poems)
-        }
         
     }
+
+    handleFilterByCollection = (state, value) => {
+
+        if (state == true) {
+            this.model.collectionsChecked.add(value);
+            this.displayPoems(this.model.poems.filter(poem => this.model.collectionsChecked.has(poem.collection)));
+        }
+
+        if (state == false) {
+            this.model.collectionsChecked.delete(value);
+            this.displayPoems(this.model.poems.filter(poem => this.model.collectionsChecked.has(poem.collection)));
+        }
+
+    }
+
 }
 
 const app = new Controller(new Model(), new View());
