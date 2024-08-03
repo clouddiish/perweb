@@ -5,7 +5,7 @@ class Model {
     }
 
     async fetchPoems() {
-        const response = await fetch("./data.json")
+        const response = await fetch("../data/poems.json")
         let data = await response.json();
         this.poems = data;
     }
@@ -14,13 +14,7 @@ class Model {
 class View {
     constructor() {
         this.poemsDiv = document.getElementById("poemsDiv");
-    }
-
-    bindLoadPoems(handler) {
-        window.addEventListener("load", (event) => {
-            event.preventDefault();
-            handler()
-        })
+        this.y2024 = document.getElementById("2024");
     }
 
     clearPoemsDiv() {
@@ -93,7 +87,8 @@ class Controller {
     }
 }
 
+const app = new Controller(new Model(), new View());
+
 window.onload = (event) => {
-    const app = new Controller(new Model(), new View());
-    app.waitAndDisplayAllPoems()
+    app.waitAndDisplayAllPoems();
 };

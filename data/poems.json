@@ -488,5 +488,20 @@
             "i'm so fed up<br>with this nonsense",
             "i don't know if i can take it<br>much longer"
         ]
+    },
+
+    {
+        "collection": "rotten brain",
+        "year": 2024,
+        "language": "ENG",
+        "title": "almost",
+        "paragraphs": [
+            "when the pain outweighs the fear<br>I feel closer to you, my dear",
+            "not quite there yet, but there were times<br>when it was almost, almost enough...",
+            "were they enough, though, to call them<br>this term reserved for the hopeless?",
+            "i don't think so<br>I think it doesn't count",
+            "until the pain is finally enough"
+        ]
     }
+
 ]
