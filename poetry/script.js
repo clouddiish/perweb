@@ -14,7 +14,17 @@ class Model {
 class View {
     constructor() {
         this.poemsDiv = document.getElementById("poemsDiv");
+
+        this.formYear = document.getElementById("formYear")
         this.y2024 = document.getElementById("2024");
+        this.y2023 = document.getElementById("2023");
+        this.y2022 = document.getElementById("2022");
+        this.y2021 = document.getElementById("2021");
+        this.y2020 = document.getElementById("2020");
+
+        this.yearsChecked = new Set([]);
+
+        this.addEventListeners();
     }
 
     clearPoemsDiv() {
@@ -42,6 +52,19 @@ class View {
 
         this.poemsDiv.appendChild(div);
     }
+
+    addEventListeners() {
+      this.formYear.addEventListener("input", event => {
+        if(event.target.className == "form-check-input" && event.target.checked == true) {
+            this.yearsChecked.add(Number(event.target.value));
+        }
+
+        if(event.target.className == "form-check-input" && event.target.checked == false) {
+            this.yearsChecked.delete(Number(event.target.value));
+        }
+      })  
+    }
+
 }
 
 class Controller {
@@ -76,7 +99,7 @@ class Controller {
 
     displayPoems(poems) {
         this.view.clearPoemsDiv();
-        for (let i = poems.length - 1; i >=0; i--) {
+        for (let i = poems.length - 1; i >= 0; i--) {
             this.view.addPoem(poems[i]);
         }
     }
