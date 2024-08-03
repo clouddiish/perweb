@@ -19,14 +19,16 @@ class View {
     constructor() {
         this.poemsDiv = document.getElementById("poemsDiv");
 
-        this.formYear = document.getElementById("formYear")
+        this.filterForm = document.getElementById("filterForm");
+
+        // this.formYear = document.getElementById("formYear")
         this.y2024 = document.getElementById("2024");
         this.y2023 = document.getElementById("2023");
         this.y2022 = document.getElementById("2022");
         this.y2021 = document.getElementById("2021");
         this.y2020 = document.getElementById("2020");
 
-        this.formCollection = document.getElementById("formCollection");
+        // this.formCollection = document.getElementById("formCollection");
         this.rottenBrain = document.getElementById("rottenBrain");
         this.humanity = document.getElementById("humanity");
         this.bittersweet = document.getElementById("bittersweet");
@@ -44,7 +46,6 @@ class View {
         this.y2022.checked = false;
         this.y2021.checked = false;
         this.y2020.checked = false;
-        this.formCollection.checked = false;
         this.rottenBrain.checked = false;
         this.humanity.checked = false;
         this.bittersweet.checked = false;
@@ -73,24 +74,27 @@ class View {
         this.poemsDiv.appendChild(div);
     }
 
-    bindFilterByYear(handler) {
-        this.formYear.addEventListener("input", event => {
-            if (event.target.className == "form-check-input") {
-                const state = event.target.checked;
-                const value = Number(event.target.value);
-                handler(state, value);
-            }
-        })
-    }
+    bindFilterPoems(handler) {
+        let ystate;
+        let yvalue;
+        let cstate;
+        let cvalue;
 
-    bindFilterByCollection(handler){
-        this.formCollection.addEventListener("input", event => {
-            if (event.target.className == "form-check-input") {
-                const state = event.target.checked;
-                const value = event.target.value;
-                handler(state, value);
+        this.filterForm.addEventListener("input", event => {
+
+            if (event.target.className == "form-check-input year") {
+                ystate = event.target.checked;
+                yvalue = Number(event.target.value);
             }
+
+            if (event.target.className == "form-check-input collection") {
+                cstate = event.target.checked;
+                cvalue = event.target.value;
+            }
+
+            handler(ystate, yvalue, cstate, cvalue);
         })
+
     }
 
 }
@@ -100,8 +104,7 @@ class Controller {
         this.model = model;
         this.view = view;
 
-        this.view.bindFilterByYear(this.handleFilterByYear);
-        this.view.bindFilterByCollection(this.handleFilterByCollection);
+        this.view.bindFilterPoems(this.handleFilterPoems);
     }
 
     getAllPoems() {
@@ -140,32 +143,39 @@ class Controller {
         this.displayPoems(this.model.poems);
     }
 
-    handleFilterByYear = (state, value) => {
+    handleFilterPoems = (ystate, yvalue, cstate, cvalue) => {
 
-        if (state == true) {
-            this.model.yearsChecked.add(value);
+        if (ystate == true) {
+            this.model.yearsChecked.add(yvalue);
+        }
+
+        if (ystate == false) {
+            this.model.yearsChecked.delete(yvalue);
+        }
+
+        if (cstate == true) {
+            this.model.collectionsChecked.add(cvalue);
+        }
+
+        if (cstate == false) {
+            this.model.collectionsChecked.delete(cvalue);
+        }
+
+        if (this.model.yearsChecked.size == 0 && this.model.collectionsChecked.size == 0) {
+            this.displayPoems(this.model.poems);
+
+        } else if (this.model.yearsChecked.size != 0 && this.model.collectionsChecked.size == 0) {
             this.displayPoems(this.model.poems.filter(poem => this.model.yearsChecked.has(poem.year)));
-        }
 
-        if (state == false) {
-            this.model.yearsChecked.delete(value);
-            this.displayPoems(this.model.poems.filter(poem => this.model.yearsChecked.has(poem.year)));
-        }
-        
-    }
-
-    handleFilterByCollection = (state, value) => {
-
-        if (state == true) {
-            this.model.collectionsChecked.add(value);
+        } else if (this.model.yearsChecked.size == 0 && this.model.collectionsChecked.size != 0) {
             this.displayPoems(this.model.poems.filter(poem => this.model.collectionsChecked.has(poem.collection)));
-        }
 
-        if (state == false) {
-            this.model.collectionsChecked.delete(value);
-            this.displayPoems(this.model.poems.filter(poem => this.model.collectionsChecked.has(poem.collection)));
-        }
+        } else {
+            this.displayPoems(this.model.poems.filter(poem =>
+                (this.model.yearsChecked.has(poem.year) && this.model.collectionsChecked.has(poem.collection))
+            ));
 
+        }
     }
 
 }
