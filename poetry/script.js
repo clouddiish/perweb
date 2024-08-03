@@ -2,6 +2,8 @@ class Model {
     constructor() {
         this.poems = [];
         this.fetchPoems();
+
+        this.yearsChecked = new Set([]);
     }
 
     async fetchPoems() {
@@ -9,6 +11,7 @@ class Model {
         let data = await response.json();
         this.poems = data;
     }
+
 }
 
 class View {
@@ -22,13 +25,19 @@ class View {
         this.y2021 = document.getElementById("2021");
         this.y2020 = document.getElementById("2020");
 
-        this.yearsChecked = new Set([]);
 
-        this.addEventListeners();
     }
 
     clearPoemsDiv() {
         this.poemsDiv.innerHTML = '<h2 class="mb-5">poems</h2>'
+    }
+
+    clearCheckboxes() {
+        this.y2024.checked = false;
+        this.y2023.checked = false;
+        this.y2022.checked = false;
+        this.y2021.checked = false;
+        this.y2020.checked = false;
     }
 
     addPoem(poem) {
@@ -53,16 +62,14 @@ class View {
         this.poemsDiv.appendChild(div);
     }
 
-    addEventListeners() {
-      this.formYear.addEventListener("input", event => {
-        if(event.target.className == "form-check-input" && event.target.checked == true) {
-            this.yearsChecked.add(Number(event.target.value));
-        }
-
-        if(event.target.className == "form-check-input" && event.target.checked == false) {
-            this.yearsChecked.delete(Number(event.target.value));
-        }
-      })  
+    bindFilterByYear(handler) {
+        this.formYear.addEventListener("input", event => {
+            if (event.target.className == "form-check-input") {
+                const state = event.target.checked;
+                const value = Number(event.target.value);
+                handler(state, value);
+            }
+        })
     }
 
 }
@@ -71,6 +78,8 @@ class Controller {
     constructor(model, view) {
         this.model = model;
         this.view = view;
+
+        this.view.bindFilterByYear(this.handleFilterByYear)
     }
 
     getAllPoems() {
@@ -108,10 +117,29 @@ class Controller {
         await this.model.fetchPoems();
         this.displayPoems(this.model.poems);
     }
+
+    handleFilterByYear = (state, value) => {
+
+        if (state == true) {
+            this.model.yearsChecked.add(value);
+            this.displayPoems(this.model.poems.filter(poem => this.model.yearsChecked.has(poem.year)));
+        }
+
+        if (state == false) {
+            this.model.yearsChecked.delete(value);
+            this.displayPoems(this.model.poems.filter(poem => this.model.yearsChecked.has(poem.year)));
+        }
+
+        if (this.model.yearsChecked.size == 0) {
+            this.displayPoems(this.model.poems)
+        }
+        
+    }
 }
 
 const app = new Controller(new Model(), new View());
 
-window.onload = (event) => {
+window.onload = () => {
     app.waitAndDisplayAllPoems();
+    app.view.clearCheckboxes();
 };
