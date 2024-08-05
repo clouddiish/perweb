@@ -8,7 +8,7 @@ class Model {
     }
 
     async fetchPoems() {
-        const response = await fetch("../data/poems.json")
+        const response = await fetch("../data/poems.json");
         let data = await response.json();
         this.poems = data;
     }
