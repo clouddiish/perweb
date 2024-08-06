@@ -36,11 +36,17 @@ ul.no-bullets {
 }
 
 .meta {
-    color:gray;
+    color: gray;
     font-style: italic;
 }
 
 #home {
     text-decoration: none;
     color: black
+}
+
+@media (max-width: 768px){
+    .stay {
+        position: static;
+    }
 }
