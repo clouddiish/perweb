@@ -23,11 +23,11 @@ class View {
 
     addArtwork(artwork) {
         let fig = document.createElement("figure");
-        fig.classList.add("figure", "row", "align-items-end", "px-5");
+        fig.classList.add("figure", "row", "align-items-end");
 
         let img = document.createElement("img");
         img.src = `../../imgs/${artwork.filename}`;
-        img.classList.add("col-7");
+        img.classList.add("col-lg-6", "col-md-10", "col-sm-12");
         img.alt = artwork.alt;
 
         let figcap = document.createElement("figcaption");

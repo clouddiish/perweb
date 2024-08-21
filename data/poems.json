@@ -502,6 +502,40 @@
             "i don't think so<br>I think it doesn't count",
             "until the pain is finally enough"
         ]
+    },
+
+    {
+        "collection": "rotten brain",
+        "year": 2024,
+        "language": "ENG",
+        "title": "pointless",
+        "paragraphs": [
+            "I don't know what to do<br>with all this pain",
+            "what is this for,<br>where is the gain?",
+            "If only I could somehow express<br>the depth of the emptiness",
+            "but nothing really compares<br>to how it feels in my chest",
+            "It lingers, and festers,<br>sometimes shrinks, sometimes grows",
+            "but I never know when it will reach<br>the worst of its forms",
+            "I guess it's for nothing<br>that there is no aim",
+            "and there are no words, after all,<br>to describe all this pain"
+        ]
+    },
+
+    {
+        "collection": "rotten brain",
+        "year": 2024,
+        "language": "ENG",
+        "title": "missing",
+        "paragraphs": [
+            "I miss my family<br>I miss my home",
+            "I miss everything<br>I've ever known",
+            "I miss my friends<br>the old and new",
+            "I miss everything<br>I loved and knew",
+            "I miss my hope<br>I miss my spark",
+            "I miss everything<br>from the past",
+            "But I especially miss<br>the present times",
+            "I miss everything<br>that's hapenning now"
+        ]
     }
 
 ]
